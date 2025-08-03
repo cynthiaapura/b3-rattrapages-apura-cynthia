@@ -10,6 +10,7 @@ use ApiPlatform\Metadata\ApiResource;
 
 #[ApiResource]
 #[ORM\Entity(repositoryClass: CartRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Cart
 {
     #[ORM\Id]
@@ -24,7 +25,7 @@ class Cart
     private ?\DateTimeInterface $createdAt = null;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
-    private ?\DateTimeInterface $updateAt = null;
+    private ?\DateTimeInterface $updatedAt = null;
 
     #[ORM\OneToMany(mappedBy: 'cart', targetEntity: CartItem::class, cascade: ['persist', 'remove'])]
     private Collection $cartItems;
@@ -61,14 +62,14 @@ class Cart
         return $this;
     }
 
-    public function getUpdateAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
-        return $this->updateAt;
+        return $this->updatedAt;
     }
 
-    public function setUpdateAt(?\DateTimeInterface $updateAt): static
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): static
     {
-        $this->updateAt = $updateAt;
+        $this->updatedAt = $updatedAt;
         return $this;
     }
 
@@ -96,5 +97,17 @@ class Cart
         }
 
         return $this;
+    }
+    #[ORM\PrePersist]
+    public function setCreatedAtValue(): void
+    {
+        if ($this->createdAt === null) {
+            $this->createdAt = new \DateTimeImmutable();
+        }
+    }
+    #[ORM\PreUpdate]
+    public function setUpdatedAtValue(): void
+    {
+        $this->updatedAt = new \DateTimeImmutable();
     }
 }
