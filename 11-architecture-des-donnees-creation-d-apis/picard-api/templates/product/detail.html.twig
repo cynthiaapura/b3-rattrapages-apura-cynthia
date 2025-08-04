@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block body %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f9f9f9;
+        color: #333;
+        margin: 2rem;
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 2rem;
+        color: #2c3e50;
+    }
+    .product-detail {
+        max-width: 600px;
+        background: #fff;
+        margin: 0 auto;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+    }
+    .product-image {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin: 0 auto 1.5rem auto;
+        border-radius: 6px;
+        box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+    }
+    .product-info p {
+        font-size: 1rem;
+        margin: 0.5rem 0;
+    }
+    .product-info strong {
+        color: #34495e;
+    }
+    .product-price {
+        color: #27ae60;
+        font-weight: 700;
+        font-size: 1.3rem;
+        margin: 1rem 0;
+    }
+    .availability {
+        font-weight: 700;
+        padding: 0.4rem 0.8rem;
+        border-radius: 12px;
+        font-size: 0.9rem;
+        width: fit-content;
+        color: #fff;
+        margin-bottom: 1.5rem;
+    }
+    .available {
+        background-color: #27ae60; /* vert */
+    }
+    .unavailable {
+        background-color: #c0392b; /* rouge */
+    }
+    a.back-link {
+        display: inline-block;
+        margin-top: 1.5rem;
+        color: #34495e;
+        text-decoration: none;
+        font-weight: 600;
+        border: 1px solid #34495e;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    a.back-link:hover {
+        background-color: #27ae60;
+        color: #fff;
+        border-color: #27ae60;
+    }
+</style>
+
+<h1>Détail du produit</h1>
+
+<div class="product-detail">
+    {% if product.image %}
+        <img src="{{ product.image }}" alt="{{ product.name }}" class="product-image">
+    {% endif %}
+
+    <div class="product-info">
+        <p><strong>Nom :</strong> {{ product.name }}</p>
+        <p><strong>Description :</strong> {{ product.description }}</p>
+        <p class="product-price">{{ product.price|number_format(2, ',', ' ') }} €</p>
+        <p>
+            <strong>Disponibilité :</strong>
+            <span class="availability {{ product.isAvailable ? 'available' : 'unavailable' }}">
+                {{ product.isAvailable ? 'En stock' : 'Rupture de stock' }}
+            </span>
+        </p>
+        <p>
+            <strong>Note :</strong>
+            {% if product.rating is not null %}
+                ★ {{ product.rating|number_format(1, ',', ' ') }} / 5
+            {% else %}
+                Pas encore noté
+            {% endif %}
+        </p>
+    </div>
+
+    <a href="{{ path('app_product') }}" class="back-link">← Retour à la liste</a>
+</div>
+{% endblock %}

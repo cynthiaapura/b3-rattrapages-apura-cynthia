@@ -1,20 +1,76 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProductController!{% endblock %}
+{% block title %}Catalogue des produits{% endblock %}
 
 {% block body %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    body {
+        font-family: Arial, sans-serif;
+        background: #f9f9f9;
+        color: #333;
+        margin: 2rem;
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 2rem;
+        color: #2c3e50;
+    }
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.5rem;
+        list-style: none;
+        padding: 0;
+        margin: 0 auto;
+        max-width: 900px;
+    }
+    .product-item {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+        padding: 1rem 1.2rem;
+        text-align: center;
+        transition: box-shadow 0.3s ease;
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+    .product-item:hover {
+        box-shadow: 0 4px 12px rgb(0 0 0 / 0.15);
+    }
+    .product-link {
+        color: #34495e;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 0.5rem;
+        font-size: 1.2rem;
+    }
+    .product-link:hover {
+        color: #27ae60;
+        text-decoration: underline;
+    }
+    .product-price {
+        color: #27ae60;
+        font-weight: 700;
+        font-size: 1.1rem;
+    }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<h1>Catalogue des produits Picard</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/home/cynthia/iim/b3-rattrapages-apura-cynthia/11-architecture-des-donnees-creation-d-apis/picard-api/src/Controller/ProductController.php</code></li>
-        <li>Your template at <code>/home/cynthia/iim/b3-rattrapages-apura-cynthia/11-architecture-des-donnees-creation-d-apis/picard-api/templates/product/index.html.twig</code></li>
+{% if products is empty %}
+    <p style="text-align: center;">Aucun produit disponible actuellement.</p>
+{% else %}
+    <ul class="products-grid">
+        {% for product in products %}
+            <li class="product-item">
+                <a href="{{ path('app_product_detail', {'id': product.id}) }}" class="product-link">
+                    {{ product.name }}
+                </a>
+                <div class="product-price">
+                    {{ product.price|number_format(2, ',', ' ') }} €
+                </div>
+            </li>
+        {% endfor %}
     </ul>
-</div>
+{% endif %}
 {% endblock %}
