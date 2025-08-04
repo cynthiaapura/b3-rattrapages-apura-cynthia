@@ -1,12 +1,10 @@
 <template>
   <div>
-    <h2>Bienvenue sur votre espace</h2>
-
     <div v-if="showToast" class="toast-notification">
         {{ toastMessage }}
     </div>
     <ul>
-      <li v-for="product in products" :key="product.id" style="margin-bottom: 10px;">
+      <li v-for="product in filteredProducts" :key="product.id" style="margin-bottom: 10px;">
         {{ product.name }} - {{ product.price }} €
         <div>
           <span 
@@ -26,6 +24,14 @@
 <script>
 export default {
   name: 'ProductList',
+
+  props: {
+    filterCategory: {
+        type: String,
+        default: ''
+    }
+  },
+
   data() {
     return {
       products: [],
@@ -33,6 +39,16 @@ export default {
       toastMessage: '',
     };
   },
+
+  computed: {
+    filteredProducts() {
+        if (!this.filterCategory) {
+            return this.products;
+        }
+        return this.products.filter(p => p.category === this.filterCategory);
+    }
+  },
+
   async mounted() {
     const stored = localStorage.getItem('products');
     if (stored) {

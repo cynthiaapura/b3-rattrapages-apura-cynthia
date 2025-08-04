@@ -1,18 +1,31 @@
 <template>
   <div id="app">
-    <ProductList />
+    <h2>Bienvenue sur votre espace</h2>
+    <CategoryFilter 
+      :categories="categories" 
+      @categorySelected="selectedCategory = $event"
+    />
+    <ProductList :filterCategory="selectedCategory" />
   </div>
 </template>
 
 <script>
+import CategoryFilter from './components/CategoryFilter.vue';
 import ProductList from './components/ProductList.vue'
 
 export default {
   name: 'App',
   components: {
-    ProductList
+    CategoryFilter, ProductList,
+  },
+  data() {
+    return {
+      selectedCategory: '',
+      categories: ['Plats cuisinés', 'Légumes', 'Desserts', 'Poissons', 'Viennoiseries', 'Fruits']
+    };
   }
 }
+
 </script>
 
 <style>
