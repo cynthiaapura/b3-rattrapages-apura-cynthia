@@ -69,6 +69,11 @@
                 <div class="product-price">
                     {{ product.price|number_format(2, ',', ' ') }} €
                 </div>
+                <form action="{{ path('app_cart_add', {'id': product.id}) }}" method="post" style="margin-top: 0.5rem;">
+                    <button type="submit" style="padding: 0.5rem 1rem; background-color: #2980b9; color: #fff; border: none; border-radius: 4px; cursor: pointer;">
+                        Ajouter au panier
+                    </button>
+                </form>
             </li>
         {% endfor %}
     </ul>

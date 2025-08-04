@@ -103,6 +103,12 @@
             {% endif %}
         </p>
     </div>
+    <form action="{{ path('app_cart_add', {'id': product.id}) }}" method="post" style="margin-top: 1.5rem;">
+        <button type="submit" style="padding: 0.6rem 1.2rem; background-color: #2980b9; color: #fff; border: none; border-radius: 6px; cursor: pointer;">
+            Ajouter au panier
+        </button>
+    </form>
+
 
     <a href="{{ path('app_product') }}" class="back-link">← Retour à la liste</a>
 </div>
