@@ -91,4 +91,25 @@ final class CartController extends AbstractController
 
         return $this->redirectToRoute('app_cart');
     }
+
+    #[Route('/cart/validate', name: 'app_cart_validate', methods: ['POST'])]
+    public function validate(): RedirectResponse
+    {
+        $cart = $this->cartRepository->findOneBy(['status' => 'pending']);
+
+        if (!$cart) {
+            $this->addFlash('error', 'Aucun panier en cours trouvé.');
+            return $this->redirectToRoute('app_cart');
+        }
+
+        try {
+            $cart->validate();
+            $this->em->flush();
+            $this->addFlash('success', 'Votre panier a été validé avec succès.');
+        } catch (\LogicException $e) {
+            $this->addFlash('error', $e->getMessage());
+        }
+
+        return $this->redirectToRoute('app_cart');
+    }
 }
