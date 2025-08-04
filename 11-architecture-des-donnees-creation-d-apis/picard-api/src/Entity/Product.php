@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ApiResource]
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Product
 {
     #[ORM\Id]
@@ -36,6 +37,18 @@ class Product
     #[ORM\Column(nullable: false)]
     private bool $available;
 
+    #[ORM\Column(nullable: false)]
+    private int $quantity;
+
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private ?\DateTimeInterface $expirationDate = null;
+
+    #[ORM\Column(type: 'datetime')]
+    private ?\DateTimeInterface $createdAt = null;
+
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private ?\DateTimeInterface $updatedAt = null;
+
     #[ORM\OneToMany(mappedBy: "product", targetEntity: CartItem::class)]
     private Collection $cartItems;
 
@@ -44,6 +57,7 @@ class Product
         $this->cartItems = new ArrayCollection();
     }
 
+    // getters et setters
     public function getId(): ?int
     {
         return $this->id;
@@ -121,6 +135,38 @@ class Product
         return $this;
     }
 
+    public function getQuantity(): int
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(int $quantity): static
+    {
+        $this->quantity = $quantity;
+        return $this;
+    }
+
+    public function getExpirationDate(): ?\DateTimeInterface
+    {
+        return $this->expirationDate;
+    }
+
+    public function setExpirationDate(?\DateTimeInterface $expirationDate): static
+    {
+        $this->expirationDate = $expirationDate;
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
     /**
      * @return Collection<int, CartItem>
      */
@@ -148,5 +194,18 @@ class Product
         }
 
         return $this;
+    }
+    #[ORM\PrePersist]
+    public function setCreatedAtValue(): void
+    {
+        if ($this->createdAt === null) {
+            $this->createdAt = new \DateTimeImmutable();
+        }
+    }
+
+    #[ORM\PreUpdate]
+    public function setUpdatedAtValue(): void
+    {
+        $this->updatedAt = new \DateTimeImmutable();
     }
 }

@@ -19,7 +19,7 @@ class Cart
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $status = null;
+    private string $status;
 
     #[ORM\Column(type: 'datetime')]
     private ?\DateTimeInterface $createdAt = null;
@@ -35,6 +35,7 @@ class Cart
         $this->cartItems = new ArrayCollection();
     }
 
+    // getters et setters 
     public function getId(): ?int
     {
         return $this->id;
@@ -56,21 +57,9 @@ class Cart
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): static
-    {
-        $this->createdAt = $createdAt;
-        return $this;
-    }
-
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): static
-    {
-        $this->updatedAt = $updatedAt;
-        return $this;
     }
 
     public function getCartItems(): Collection
@@ -81,7 +70,7 @@ class Cart
     public function addCartItem(CartItem $cartItem): static
     {
         if (!$this->cartItems->contains($cartItem)) {
-            $this->cartItems[] = $cartItem;
+            $this->cartItems->add($cartItem);
             $cartItem->setCart($this);
         }
 
