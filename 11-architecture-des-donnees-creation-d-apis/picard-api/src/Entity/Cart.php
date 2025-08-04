@@ -33,6 +33,7 @@ class Cart
     public function __construct()
     {
         $this->cartItems = new ArrayCollection();
+        $this->status = 'pending';
     }
 
     // getters et setters 
@@ -87,6 +88,68 @@ class Cart
 
         return $this;
     }
+
+    public function addProduct(Product $product, int $quantity = 1): static
+    {
+        foreach ($this->cartItems as $item) {
+            if ($item->getProduct() === $product) {
+                $item->setQuantity($item->getQuantity() + $quantity);
+                return $this;
+            }
+        }
+
+        $cartItem = new CartItem();
+        $cartItem->setProduct($product);
+        $cartItem->setQuantity($quantity);
+        $this->addCartItem($cartItem);
+
+        return $this;
+    }
+
+    public function removeProduct(Product $product): static
+    {
+        foreach ($this->cartItems as $item) {
+            if ($item->getProduct() === $product) {
+                $this->removeCartItem($item);
+                break;
+            }
+        }
+
+        return $this;
+    }
+
+    public function getTotal(): float
+    {
+        $total = 0.0;
+        foreach ($this->cartItems as $item) {
+            $total += $item->getProduct()->getPrice() * $item->getQuantity();
+        }
+        return $total;
+    }
+
+    public function getTotalQuantity(): int
+    {
+        $totalQuantity = 0;
+        foreach ($this->cartItems as $item) {
+            $totalQuantity += $item->getQuantity();
+        }
+        return $totalQuantity;
+    }
+
+    /**
+     * Valide le panier et change son statut
+     * @throws \LogicException leve une excepetion si le panier est vide
+     */
+    public function validate(): static
+    {
+        if ($this->cartItems->isEmpty()) {
+            throw new \LogicException('Le panier est vide, impossible de valider.');
+        }
+
+        $this->setStatus('validated');
+        return $this;
+    }
+
     #[ORM\PrePersist]
     public function setCreatedAtValue(): void
     {

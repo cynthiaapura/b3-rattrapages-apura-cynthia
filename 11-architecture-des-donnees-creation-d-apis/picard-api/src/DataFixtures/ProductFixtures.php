@@ -22,6 +22,8 @@ class ProductFixtures extends Fixture
             $product->setPrice($faker->randomFloat(2, 1, 100));
             $product->setRating($faker->randomFloat(1, 0, 5));
             $product->setAvailable($faker->boolean(80));
+            $product->setQuantity($faker->numberBetween(1, 100));
+            $product->setExpirationDate($faker->dateTimeBetween('now', '+6 months'));
 
             $manager->persist($product);
         }
