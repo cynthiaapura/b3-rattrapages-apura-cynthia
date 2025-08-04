@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "name": "Lasagnes bolognaises",
+    "description": "Lasagnes à la viande de bœuf, sauce tomate cuisinée.",
+    "price": 6.99,
+    "quantity": 12,
+    "category": "Plats cuisinés",
+    "expirationDate": "2025-12-01",
+    "addedDate": "2025-08-01"
+  },
+  {
+    "id": 2,
+    "name": "Épinards hachés",
+    "description": "Épinards surgelés prêts à cuisiner.",
+    "price": 2.50,
+    "quantity": 30,
+    "category": "Légumes",
+    "expirationDate": "2026-01-15",
+    "addedDate": "2025-08-01"
+  },
+  {
+    "id": 3,
+    "name": "Tarte aux pommes",
+    "description": "Tarte croustillante garnie de pommes caramélisées.",
+    "price": 4.75,
+    "quantity": 15,
+    "category": "Desserts",
+    "expirationDate": "2026-03-10",
+    "addedDate": "2025-08-01"
+  },
+  {
+    "id": 4,
+    "name": "Poêlée campagnarde",
+    "description": "Mélange de pommes de terre, lardons et champignons.",
+    "price": 5.90,
+    "quantity": 20,
+    "category": "Plats cuisinés",
+    "expirationDate": "2026-05-01",
+    "addedDate": "2025-08-01"
+  },
+  {
+    "id": 5,
+    "name": "Filets de colin",
+    "description": "Poisson blanc sans arêtes, surgelé.",
+    "price": 7.20,
+    "quantity": 18,
+    "category": "Poissons",
+    "expirationDate": "2026-06-15",
+    "addedDate": "2025-08-01"
+  },
+  {
+    "id": 6,
+    "name": "Petits pois extra-fins",
+    "description": "Petits pois doux et tendres, surgelés.",
+    "price": 2.30,
+    "quantity": 40,
+    "category": "Légumes",
+    "expirationDate": "2026-04-01",
+    "addedDate": "2025-08-01"
+  },
+  {
+    "id": 7,
+    "name": "Sorbet framboise",
+    "description": "Sorbet fruité sans colorant ni conservateur.",
+    "price": 3.95,
+    "quantity": 25,
+    "category": "Desserts",
+    "expirationDate": "2026-07-20",
+    "addedDate": "2025-08-01"
+  },
+  {
+    "id": 8,
+    "name": "Raviolis ricotta épinards",
+    "description": "Pâtes farcies aux épinards et à la ricotta.",
+    "price": 5.80,
+    "quantity": 22,
+    "category": "Plats cuisinés",
+    "expirationDate": "2026-02-28",
+    "addedDate": "2025-08-01"
+  },
+  {
+    "id": 9,
+    "name": "Croissants pur beurre",
+    "description": "Viennoiseries précuites à réchauffer au four.",
+    "price": 4.20,
+    "quantity": 35,
+    "category": "Petit-déjeuner",
+    "expirationDate": "2026-08-01",
+    "addedDate": "2025-08-01"
+  },
+  {
+    "id": 10,
+    "name": "Mélange fruits rouges",
+    "description": "Fruits rouges surgelés pour desserts ou smoothies.",
+    "price": 4.10,
+    "quantity": 28,
+    "category": "Fruits",
+    "expirationDate": "2026-09-01",
+    "addedDate": "2025-08-01"
+  }
+]
