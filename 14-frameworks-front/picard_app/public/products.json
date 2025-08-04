@@ -4,7 +4,7 @@
     "name": "Lasagnes bolognaises",
     "description": "Lasagnes à la viande de bœuf, sauce tomate cuisinée.",
     "price": 6.99,
-    "quantity": 12,
+    "quantity": 0,
     "rate": 0,
     "category": "Plats cuisinés",
     "expirationDate": "2025-12-01",
