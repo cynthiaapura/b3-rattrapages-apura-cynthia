@@ -8,7 +8,8 @@
     "rate": 0,
     "category": "Plats cuisinés",
     "expirationDate": "2025-12-01",
-    "addedDate": "2025-08-01"
+    "addedDate": "2025-08-01",
+    "available": ""
   },
   {
     "id": 2,
@@ -19,7 +20,8 @@
     "rate": 0,
     "category": "Légumes",
     "expirationDate": "2026-01-15",
-    "addedDate": "2025-08-01"
+    "addedDate": "2025-08-01",
+    "available": ""
   },
   {
     "id": 3,
@@ -30,7 +32,8 @@
     "rate": 0,
     "category": "Desserts",
     "expirationDate": "2026-03-10",
-    "addedDate": "2025-08-01"
+    "addedDate": "2025-08-01",
+    "available": ""
   },
   {
     "id": 4,
@@ -41,7 +44,8 @@
     "rate": 0,
     "category": "Plats cuisinés",
     "expirationDate": "2026-05-01",
-    "addedDate": "2025-08-01"
+    "addedDate": "2025-08-01",
+    "available": ""
   },
   {
     "id": 5,
@@ -52,7 +56,8 @@
     "rate": 0,
     "category": "Poissons",
     "expirationDate": "2026-06-15",
-    "addedDate": "2025-08-01"
+    "addedDate": "2025-08-01",
+    "available": ""
   },
   {
     "id": 6,
@@ -63,7 +68,8 @@
     "rate": 0,
     "category": "Légumes",
     "expirationDate": "2026-04-01",
-    "addedDate": "2025-08-01"
+    "addedDate": "2025-08-01",
+    "available": ""
   },
   {
     "id": 7,
@@ -74,7 +80,8 @@
     "rate": 0,
     "category": "Desserts",
     "expirationDate": "2026-07-20",
-    "addedDate": "2025-08-01"
+    "addedDate": "2025-08-01",
+    "available": ""
   },
   {
     "id": 8,
@@ -85,7 +92,8 @@
     "rate": 0,
     "category": "Plats cuisinés",
     "expirationDate": "2026-02-28",
-    "addedDate": "2025-08-01"
+    "addedDate": "2025-08-01",
+    "available": ""
   },
   {
     "id": 9,
@@ -96,7 +104,8 @@
     "rate": 0,
     "category": "Viennoiseries",
     "expirationDate": "2026-08-01",
-    "addedDate": "2025-08-01"
+    "addedDate": "2025-08-01",
+    "available": ""
   },
   {
     "id": 10,
@@ -107,6 +116,7 @@
     "rate": 0,
     "category": "Fruits",
     "expirationDate": "2026-09-01",
-    "addedDate": "2025-08-01"
+    "addedDate": "2025-08-01",
+    "available": ""
   }
 ]

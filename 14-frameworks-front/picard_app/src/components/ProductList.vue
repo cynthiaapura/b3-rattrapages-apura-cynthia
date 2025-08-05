@@ -1,22 +1,18 @@
 <template>
   <div>
     <div v-if="showToast" class="toast-notification">
-        {{ toastMessage }}
+      {{ toastMessage }}
     </div>
-    <ProductModal v-if="selectedProduct" :product="selectedProduct" @close="selectedProduct = null"/>
+    <ProductModal v-if="selectedProduct" :product="selectedProduct" @close="selectedProduct = null" />
 
     <ul>
-      <li v-for="product in filteredProducts" :key="product.id" :class="{'unavailable': !product.quantity, 'clickable': product.quantity > 0}" 
-      style="margin-bottom: 10px;" 
-      @click="product.quantity ? openProductDetails(product) :  null">
+      <li v-for="product in filteredProducts" :key="product.id"
+        :class="{ 'unavailable': !product.quantity, 'clickable': product.quantity > 0 }" style="margin-bottom: 10px;"
+        @click="product.quantity ? openProductDetails(product) : null">
         {{ product.name }} - Quantitée disponible : {{ product.quantity }}
         <div>
-          <span 
-            v-for="star in 5" 
-            :key="star" 
-            @click="setRating(product.id, star)" 
-            :style="{ cursor: 'pointer', color: star <= product.rate ? 'gold' : 'gray' }"
-          >
+          <span v-for="star in 5" :key="star" @click="setRating(product.id, star)"
+            :style="{ cursor: 'pointer', color: star <= product.rate ? 'gold' : 'gray' }">
             ★
           </span>
         </div>
@@ -30,20 +26,22 @@ import ProductModal from './ProductModal.vue';
 
 export default {
   name: 'ProductList',
-  components: {
-    ProductModal
-  },
+  components: { ProductModal },
 
   props: {
     filterCategory: {
-        type: String,
-        default: ''
+      type: String,
+      default: ''
+    },
+    products: {
+      type: Array,
+      required: true
     }
   },
 
   data() {
     return {
-      products: [],
+      localProducts: [],
       showToast: false,
       toastMessage: '',
       selectedProduct: null,
@@ -52,49 +50,47 @@ export default {
 
   computed: {
     filteredProducts() {
-        if (!this.filterCategory) {
-            return this.products;
-        }
-        return this.products.filter(p => p.category === this.filterCategory);
+      if (!this.filterCategory) {
+        return this.localProducts;
+      }
+      return this.localProducts.filter(p => p.category === this.filterCategory);
     }
   },
 
-  async mounted() {
-    const stored = localStorage.getItem('products');
-    if (stored) {
-      this.products = JSON.parse(stored);
-    } else {
-      try {
-        const response = await fetch('/products.json');
-        const data = await response.json();
-        this.products = data;
-        localStorage.setItem('products', JSON.stringify(data));
-      } catch (error) {
-        console.error('Erreur lors du chargement du fichier JSON :', error);
+  watch: {
+    products: {
+      immediate: true,
+      handler(newProducts) {
+        this.localProducts = [...newProducts];
       }
     }
   },
+
+  mounted() {
+  },
+
   methods: {
     setRating(productId, rating) {
-      const product = this.products.find(p => p.id === productId);
+      const product = this.localProducts.find(p => p.id === productId);
       if (product) {
         product.rate = rating;
-        localStorage.setItem('products', JSON.stringify(this.products));
+        localStorage.setItem('products', JSON.stringify(this.localProducts));
 
         this.toastMessage = `Votre note pour "${product.name}" est enregistrée.`;
         this.showToast = true;
         setTimeout(() => {
-            this.showToast = false;
-            this.toastMessage = '';
+          this.showToast = false;
+          this.toastMessage = '';
         }, 3000);
       }
     },
     openProductDetails(product) {
-        this.selectedProduct = product;
+      this.selectedProduct = product;
     }
   },
 };
 </script>
+
 
 
 <style scoped>
@@ -102,22 +98,22 @@ export default {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: #2c3e50; 
+  background-color: #2c3e50;
   color: white;
   padding: 12px 20px;
   border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   font-weight: 600;
   z-index: 1000;
   opacity: 0.9;
 }
+
 .unavailable {
-    opacity: 0.5;
-    filter: grayscale(80%);
+  opacity: 0.5;
+  filter: grayscale(80%);
 }
 
 .clickable {
   cursor: pointer;
 }
 </style>
-
