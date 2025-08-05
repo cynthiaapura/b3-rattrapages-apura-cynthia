@@ -5,7 +5,13 @@
       <p><strong>Description :</strong> {{ product.description }}</p>
       <p><strong>Catégorie :</strong> {{ product.category }}</p>
       <p><strong>Prix :</strong> {{ product.price }} €</p>
-      <p><strong>Quantité disponible :</strong> {{ product.quantity }}</p>
+      <p>
+        <strong>Quantité disponible :</strong>
+        <span v-if="!isEditing">{{ product.quantity }}</span>
+        <input v-else type="number" min="0" v-model.number="localQuantity" @keydown.enter.prevent="validateQuantity"
+          @keydown.esc.prevent="cancelEditing" ref="quantityInput" />
+        <button @click="startEditing" v-if="!isEditing">Modifier</button>
+      </p>
       <p><strong>Date d'expiration :</strong> {{ product.expirationDate }}</p>
       <p><strong>Date d'ajout :</strong> {{ product.addedDate }}</p>
       <button @click="close">Fermer</button>
@@ -19,9 +25,48 @@ export default {
   props: {
     product: Object
   },
+  data() {
+    return {
+      isEditing: false,
+      localQuantity: this.product.quantity,
+      isDirty: false,
+    };
+  },
   methods: {
+    startEditing() {
+      this.isEditing = true;
+      this.localQuantity = this.product.quantity;
+      this.isDirty = false;
+      this.$nextTick(() => {
+        this.$refs.quantityInput.focus();
+      });
+    },
+    validateQuantity() {
+      if (this.localQuantity !== this.product.quantity) {
+        this.$emit('update-quantity', { id: this.product.id, quantity: this.localQuantity });
+        this.isDirty = false;
+      }
+      this.isEditing = false;
+    },
+    cancelEditing() {
+      this.isEditing = false;
+      this.localQuantity = this.product.quantity;
+      this.isDirty = false;
+    },
     close() {
+      if (this.isEditing) {
+        alert('Vous avez des modifications non enregistrées. Veuillez valider avec Entrée ou annuler la modification.');
+        this.$refs.quantityInput.focus();
+        return;
+      }
       this.$emit('close');
+    }
+  },
+  watch: {
+    product(newProduct) {
+      this.localQuantity = newProduct.quantity;
+      this.isEditing = false;
+      this.isDirty = false;
     }
   }
 }

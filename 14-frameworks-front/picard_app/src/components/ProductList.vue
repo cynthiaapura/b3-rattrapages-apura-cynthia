@@ -3,13 +3,14 @@
     <div v-if="showToast" class="toast-notification">
       {{ toastMessage }}
     </div>
-    <ProductModal v-if="selectedProduct" :product="selectedProduct" @close="selectedProduct = null" />
+    <ProductModal v-if="selectedProduct" :product="selectedProduct" @close="selectedProduct = null"
+      @update-quantity="handleUpdateQuantity" />
 
     <ul>
       <li v-for="product in filteredProducts" :key="product.id"
-        :class="{ 'unavailable': !product.available, 'clickable': product.available > 0 }" style="margin-bottom: 10px;"
-        @click="product.available ? openProductDetails(product) : null">
-        {{ product.name }} - Quantitée disponible : {{ product.quantity }}
+        :class="{ 'unavailable': !product.available, 'clickable': true}" style="margin-bottom: 10px;"
+        @click="openProductDetails(product)">
+        {{ product.name }} - Quantité disponible : {{ product.quantity }}
         <div>
           <span v-for="star in 5" :key="star" @click.stop="setRating(product.id, star)"
             :style="{ cursor: 'pointer', color: star <= product.rate ? 'gold' : 'gray' }">
@@ -93,6 +94,24 @@ export default {
     },
     deleteProduct(productId) {
       this.$emit('delete-product', productId);
+    },
+    startEditing() {
+      this.isEditing = true;
+      this.localQuantity = this.product.quantity;
+      this.isDirty = false;
+      this.$nextTick(() => {
+        this.$refs.quantityInput.focus();
+      });
+    },
+    handleUpdateQuantity({ id, quantity }) {
+      this.$emit('update-quantity', { id, quantity });
+      this.selectedProduct = null;
+      this.showToast = true;
+      this.toastMessage = `Quantité mise à jour pour le produit.`;
+      setTimeout(() => {
+        this.showToast = false;
+        this.toastMessage = '';
+      }, 3000);
     }
   }
 }

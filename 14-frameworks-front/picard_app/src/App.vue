@@ -2,7 +2,8 @@
   <div id="app">
     <h2>Bienvenue sur votre espace</h2>
     <CategoryFilter :categories="categories" @categorySelected="selectedCategory = $event" />
-    <ProductList :filterCategory="selectedCategory" :products="products" @delete-product="deleteProduct" />
+    <ProductList :filterCategory="selectedCategory" :products="products" @delete-product="deleteProduct"
+      @update-quantity="updateProductQuantity" />
     <button @click="showAddModal = true"> Ajouter un produit </button>
     <AddProductModal v-if="showAddModal" :categories="categories" @close="showAddModal = false"
       @product-added="addProduct" />
@@ -50,7 +51,16 @@ export default {
     deleteProduct(productId) {
       this.products = this.products.filter(p => p.id !== productId);
       localStorage.setItem('products', JSON.stringify(this.products));
+    },
+    updateProductQuantity({ id, quantity }) {
+      this.products = this.products.map(p =>
+        p.id === id
+          ? { ...p, quantity, available: quantity > 0 }
+          : p
+      );
+      localStorage.setItem('products', JSON.stringify(this.products));
     }
+
   }
 }
 </script>
