@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="showToast" class="toast-notification">
+    <div v-if="isToastVisible" class="toast-notification">
       {{ toastMessage }}
     </div>
     <ProductModal v-if="selectedProduct" :product="selectedProduct" @close="selectedProduct = null"
@@ -8,7 +8,7 @@
 
     <ul>
       <li v-for="product in filteredProducts" :key="product.id"
-        :class="{ 'unavailable': !product.available, 'clickable': true}" style="margin-bottom: 10px;"
+        :class="{ 'unavailable': !product.available, 'clickable': true }" style="margin-bottom: 10px;"
         @click="openProductDetails(product)">
         {{ product.name }} - Quantité disponible : {{ product.quantity }}
         <div>
@@ -43,8 +43,7 @@ export default {
 
   data() {
     return {
-      localProducts: [],
-      showToast: false,
+      isToastVisible: false,
       toastMessage: '',
       selectedProduct: null,
     };
@@ -53,41 +52,27 @@ export default {
   computed: {
     filteredProducts() {
       if (!this.filterCategory) {
-        return this.localProducts;
-      }
-      return this.localProducts.filter(p => p.category === this.filterCategory);
-    }
-  },
-
-  watch: {
-    products: {
-      immediate: true,
-      handler(newProducts) {
-        this.localProducts = [...newProducts.map(p => ({
+        return this.products.map(p => ({
           ...p,
           available: p.quantity > 0
-        }))];
+        }));
       }
+      return this.products
+        .filter(p => p.category === this.filterCategory)
+        .map(p => ({
+          ...p,
+          available: p.quantity > 0
+        }));
     }
   },
-
-  mounted() {
-  },
-
   methods: {
-    setRating(productId, rating) {
-      const product = this.localProducts.find(p => p.id === productId);
-      if (product) {
-        product.rate = rating;
-        localStorage.setItem('products', JSON.stringify(this.localProducts));
-
-        this.toastMessage = `Votre note pour "${product.name}" est enregistrée.`;
-        this.showToast = true;
-        setTimeout(() => {
-          this.showToast = false;
-          this.toastMessage = '';
-        }, 3000);
-      }
+    showToast(message) {
+      this.toastMessage = message;
+      this.isToastVisible = true;
+      setTimeout(() => {
+        this.isToastVisible = false;
+        this.toastMessage = '';
+      }, 3000);
     },
     openProductDetails(product) {
       this.selectedProduct = product;
@@ -95,24 +80,15 @@ export default {
     deleteProduct(productId) {
       this.$emit('delete-product', productId);
     },
-    startEditing() {
-      this.isEditing = true;
-      this.localQuantity = this.product.quantity;
-      this.isDirty = false;
-      this.$nextTick(() => {
-        this.$refs.quantityInput.focus();
-      });
-    },
     handleUpdateQuantity({ id, quantity }) {
       this.$emit('update-quantity', { id, quantity });
       this.selectedProduct = null;
-      this.showToast = true;
-      this.toastMessage = `Quantité mise à jour pour le produit.`;
-      setTimeout(() => {
-        this.showToast = false;
-        this.toastMessage = '';
-      }, 3000);
-    }
+      this.showToast(`Quantité modifiée.`);
+    },
+    setRating(productId, rating) {
+      this.$emit('update-rate', { id: productId, rate: rating });
+      this.showToast(`Votre note pour ce produit est enregistrée.`);
+    },
   }
 }
 </script>

@@ -68,7 +68,7 @@ export default {
                 price: this.price,
                 quantity: this.quantity,
                 rate: 0,
-                category: this.category.trim(),
+                category: this.category,
                 expirationDate: this.expirationDate,
                 addedDate: new Date().toISOString().slice(0, 10)
             };

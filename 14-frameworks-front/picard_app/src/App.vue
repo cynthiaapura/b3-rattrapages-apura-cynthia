@@ -3,7 +3,7 @@
     <h2>Bienvenue sur votre espace</h2>
     <CategoryFilter :categories="categories" @categorySelected="selectedCategory = $event" />
     <ProductList :filterCategory="selectedCategory" :products="products" @delete-product="deleteProduct"
-      @update-quantity="updateProductQuantity" />
+      @update-quantity="updateProductQuantity" @update-rate="updateProductRate" />
     <button @click="showAddModal = true"> Ajouter un produit </button>
     <AddProductModal v-if="showAddModal" :categories="categories" @close="showAddModal = false"
       @product-added="addProduct" />
@@ -44,23 +44,33 @@ export default {
     }
   },
   methods: {
-    addProduct(newProduct) {
-      this.products = [...this.products, newProduct]
+    saveProduct() {
       localStorage.setItem('products', JSON.stringify(this.products));
     },
+    addProduct(newProduct) {
+      this.products = [...this.products, newProduct]
+      this.saveProduct();
+    },
     deleteProduct(productId) {
-      this.products = this.products.filter(p => p.id !== productId);
-      localStorage.setItem('products', JSON.stringify(this.products));
+      this.products = this.products.filter(p => p.id !== productId); 
+      this.saveProduct();
     },
     updateProductQuantity({ id, quantity }) {
       this.products = this.products.map(p =>
         p.id === id
-          ? { ...p, quantity, available: quantity > 0 }
+          ? { ...p, quantity }
           : p
       );
-      localStorage.setItem('products', JSON.stringify(this.products));
-    }
-
+      this.saveProduct();
+    },
+    updateProductRate({ id, rate }) {
+      this.products = this.products.map(p =>
+        p.id === id
+          ? { ...p, rate }
+          : p
+      );
+      this.saveProduct();
+    },
   }
 }
 </script>

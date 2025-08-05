@@ -29,21 +29,19 @@ export default {
     return {
       isEditing: false,
       localQuantity: this.product.quantity,
-      isDirty: false,
     };
   },
   methods: {
     startEditing() {
       this.isEditing = true;
       this.localQuantity = this.product.quantity;
-      this.isDirty = false;
       this.$nextTick(() => {
         this.$refs.quantityInput.focus();
       });
     },
     validateQuantity() {
       if (this.localQuantity === null || this.localQuantity < 0) {
-        alert('La quantié ne peut pas être négative.');
+        alert('La quantité ne peut pas être négative.');
         this.$refs.quantityInput.focus();
         return;
       }
@@ -56,7 +54,6 @@ export default {
     cancelEditing() {
       this.isEditing = false;
       this.localQuantity = this.product.quantity;
-      this.isDirty = false;
     },
     close() {
       if (this.isEditing) {
@@ -71,7 +68,6 @@ export default {
     product(newProduct) {
       this.localQuantity = newProduct.quantity;
       this.isEditing = false;
-      this.isDirty = false;
     }
   }
 }
