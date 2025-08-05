@@ -35,7 +35,7 @@
                 <input id="expirationDate" v-model="expirationDate" type="date" required />
             </div>
 
-            <button type="submit">Ajouter le produit</button>
+            <button class="secondary-button" type="submit">Ajouter le produit</button>
         </form>
     </div>
 </template>

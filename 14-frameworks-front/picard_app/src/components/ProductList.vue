@@ -6,18 +6,23 @@
     <ProductModal v-if="selectedProduct" :product="selectedProduct" @close="selectedProduct = null"
       @update-quantity="handleUpdateQuantity" />
 
-    <ul>
+    <ul class="product-list-grid">
       <li v-for="product in filteredProducts" :key="product.id"
         :class="{ 'unavailable': !product.available, 'clickable': true }" style="margin-bottom: 10px;"
         @click="openProductDetails(product)">
-        {{ product.name }} - Quantité disponible : {{ product.quantity }}
+        <div class="product-name">
+          {{ product.name }}
+        </div>
+        <div>
+          Quantité disponible : {{ product.quantity }}
+        </div>
         <div>
           <span v-for="star in 5" :key="star" @click.stop="setRating(product.id, star)"
             :style="{ cursor: 'pointer', color: star <= product.rate ? 'gold' : 'gray' }">
             ★
           </span>
         </div>
-        <button @click.stop="deleteProduct(product.id)"> Supprimer</button>
+        <button class="secondary-button" @click.stop="deleteProduct(product.id)"> Supprimer</button>
       </li>
     </ul>
   </div>
@@ -92,30 +97,43 @@ export default {
   }
 }
 </script>
-
-
-
 <style scoped>
-.toast-notification {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #2c3e50;
-  color: white;
-  padding: 12px 20px;
-  border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+ul {
+  padding: 40px;
+  margin: 0;
+}
+
+.product-list-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+li {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.product-name {
+  text-align: center;
+  font-size: larger;
   font-weight: 600;
-  z-index: 1000;
-  opacity: 0.9;
+
 }
 
-.unavailable {
-  opacity: 0.5;
-  filter: grayscale(80%);
+.product-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-.clickable {
-  cursor: pointer;
+.product-actions input[type="number"] {
+  width: 70px;
+  padding: 5px;
+  font-size: 0.9rem;
 }
 </style>

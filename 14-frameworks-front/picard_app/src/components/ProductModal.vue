@@ -10,7 +10,7 @@
         <span v-if="!isEditing">{{ product.quantity }}</span>
         <input v-else type="number" min="0" required v-model.number="localQuantity"
           @keydown.enter.prevent="validateQuantity" @keydown.esc.prevent="cancelEditing" ref="quantityInput" />
-        <button @click="startEditing" v-if="!isEditing">Modifier</button>
+        <button class="edit-button" @click="startEditing" v-if="!isEditing">Modifier</button>
       </p>
       <p><strong>Date d'expiration :</strong> {{ product.expirationDate }}</p>
       <p><strong>Date d'ajout :</strong> {{ product.addedDate }}</p>
@@ -94,5 +94,16 @@ export default {
   width: 400px;
   max-width: 90%;
   text-align: left;
+}
+
+.edit-button {
+  margin-left: 10px;
+  padding: 5px;
+}
+
+.edit-button:hover {
+  color: white;
+  background-color: var(--color-secondary);
+  transition: transform 0.2 easy;
 }
 </style>

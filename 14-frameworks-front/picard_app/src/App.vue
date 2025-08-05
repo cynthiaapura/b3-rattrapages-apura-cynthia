@@ -1,12 +1,22 @@
 <template>
   <div id="app">
-    <h2>Bienvenue sur votre espace</h2>
-    <CategoryFilter :categories="categories" @categorySelected="selectedCategory = $event" />
-    <ProductList :filterCategory="selectedCategory" :products="products" @delete-product="deleteProduct"
-      @update-quantity="updateProductQuantity" @update-rate="updateProductRate" />
-    <button @click="showAddModal = true"> Ajouter un produit </button>
+    <header>
+      <img src="./assets/logo.png" alt="Logo Picard" style="height: 50px;" />
+      <h2>Bienvenue sur votre espace</h2>
+    </header>
+
+    <div class="controls">
+      <CategoryFilter :categories="categories" @categorySelected="selectedCategory = $event" />
+      <button class="primary-button" @click="showAddModal = true"> Ajouter un produit </button>
+    </div>
+
     <AddProductModal v-if="showAddModal" :categories="categories" @close="showAddModal = false"
       @product-added="addProduct" />
+
+    <ProductList :filterCategory="selectedCategory" :products="products" @delete-product="deleteProduct"
+      @update-quantity="updateProductQuantity" @update-rate="updateProductRate" />
+
+    <footer>Picard - Gestion des distributeurs</footer>
   </div>
 </template>
 
@@ -52,7 +62,7 @@ export default {
       this.saveProduct();
     },
     deleteProduct(productId) {
-      this.products = this.products.filter(p => p.id !== productId); 
+      this.products = this.products.filter(p => p.id !== productId);
       this.saveProduct();
     },
     updateProductQuantity({ id, quantity }) {
@@ -74,14 +84,3 @@ export default {
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
