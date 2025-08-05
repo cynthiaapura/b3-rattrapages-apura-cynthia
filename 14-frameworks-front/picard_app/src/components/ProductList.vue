@@ -16,6 +16,7 @@
             ★
           </span>
         </div>
+        <button @click.stop="deleteProduct(product.id)"> Supprimer</button>
       </li>
     </ul>
   </div>
@@ -86,9 +87,12 @@ export default {
     },
     openProductDetails(product) {
       this.selectedProduct = product;
+    },
+    deleteProduct(productId) {
+      this.$emit('delete-product', productId);
     }
-  },
-};
+  }
+}
 </script>
 
 
