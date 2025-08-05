@@ -110,13 +110,14 @@ button:disabled {
 /* grid */
 .product-list-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 20px;
   list-style: none;
   padding: 0;
 }
 
 .product-list-grid li {
+  position: relative;
   background-color: white;
   border: 1px solid #ddd;
   border-radius: var(--border-radius);
@@ -124,8 +125,20 @@ button:disabled {
   box-shadow: var(--shadow-light);
   display: flex;
   flex-direction: column;
+  gap: 5px;
   justify-content: space-between;
   transition: transform 0.2s ease;
+}
+
+.unavailable-badge {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-left: 8px;
+  border-radius: 50%;
+  background-color: rgb(255, 0, 0);
+  vertical-align: middle;
+  cursor: default;
 }
 
 .product-list-grid li:hover {

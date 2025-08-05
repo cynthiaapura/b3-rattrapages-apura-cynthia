@@ -12,6 +12,7 @@
         @click="openProductDetails(product)">
         <div class="product-name">
           {{ product.name }}
+          <span v-if="!product.available" class="unavailable-badge" title="Non disponible"></span>
         </div>
         <div>
           Quantité disponible : {{ product.quantity }}
@@ -102,38 +103,23 @@ ul {
   padding: 40px;
   margin: 0;
 }
-
-.product-list-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
-}
-
-li {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
 .product-name {
+  position: relative;
   text-align: center;
   font-size: larger;
   font-weight: 600;
-
 }
-
-.product-actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.product-actions input[type="number"] {
-  width: 70px;
-  padding: 5px;
-  font-size: 0.9rem;
+.toast-notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #2c3e50;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  font-weight: 600;
+  z-index: 1000;
+  opacity: 0.9;
 }
 </style>

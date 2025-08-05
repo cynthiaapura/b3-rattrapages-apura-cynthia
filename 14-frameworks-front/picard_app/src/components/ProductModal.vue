@@ -1,12 +1,14 @@
 <template>
   <div class="modal-backdrop" @click.self="close">
     <div class="modal-content">
-      <h3>{{ product.name }}</h3>
+      <h3>{{ product.name }}
+        <span v-if="!product.available" class="unavailable-badge" title="Non disponible"></span>
+      </h3>
       <p><strong>Description :</strong> {{ product.description }}</p>
       <p><strong>Catégorie :</strong> {{ product.category }}</p>
       <p><strong>Prix :</strong> {{ product.price }} €</p>
       <p>
-        <strong>Quantité disponible :</strong>
+        <strong>Quantité disponible : </strong>
         <span v-if="!isEditing">{{ product.quantity }}</span>
         <input v-else type="number" min="0" required v-model.number="localQuantity"
           @keydown.enter.prevent="validateQuantity" @keydown.esc.prevent="cancelEditing" ref="quantityInput" />
@@ -30,6 +32,11 @@ export default {
       isEditing: false,
       localQuantity: this.product.quantity,
     };
+  },
+  computed: {
+    isAvailable() {
+      return this.product.quantity > 0;
+    }
   },
   methods: {
     startEditing() {
