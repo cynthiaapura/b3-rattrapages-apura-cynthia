@@ -16,7 +16,7 @@
     "name": "Épinards hachés",
     "description": "Épinards surgelés prêts à cuisiner.",
     "price": 2.50,
-    "quantity": 30,
+    "quantity": 0,
     "rate": 0,
     "category": "Légumes",
     "expirationDate": "2026-01-15",

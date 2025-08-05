@@ -7,8 +7,8 @@
 
     <ul>
       <li v-for="product in filteredProducts" :key="product.id"
-        :class="{ 'unavailable': !product.quantity, 'clickable': product.quantity > 0 }" style="margin-bottom: 10px;"
-        @click="product.quantity ? openProductDetails(product) : null">
+        :class="{ 'unavailable': !product.available, 'clickable': product.available > 0 }" style="margin-bottom: 10px;"
+        @click="product.available ? openProductDetails(product) : null">
         {{ product.name }} - Quantitée disponible : {{ product.quantity }}
         <div>
           <span v-for="star in 5" :key="star" @click.stop="setRating(product.id, star)"
@@ -62,7 +62,10 @@ export default {
     products: {
       immediate: true,
       handler(newProducts) {
-        this.localProducts = [...newProducts];
+        this.localProducts = [...newProducts.map(p => ({
+          ...p,
+          available: p.quantity > 0
+        }))];
       }
     }
   },
