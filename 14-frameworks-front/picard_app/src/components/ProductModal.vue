@@ -8,8 +8,8 @@
       <p>
         <strong>Quantité disponible :</strong>
         <span v-if="!isEditing">{{ product.quantity }}</span>
-        <input v-else type="number" min="0" v-model.number="localQuantity" @keydown.enter.prevent="validateQuantity"
-          @keydown.esc.prevent="cancelEditing" ref="quantityInput" />
+        <input v-else type="number" min="0" required v-model.number="localQuantity"
+          @keydown.enter.prevent="validateQuantity" @keydown.esc.prevent="cancelEditing" ref="quantityInput" />
         <button @click="startEditing" v-if="!isEditing">Modifier</button>
       </p>
       <p><strong>Date d'expiration :</strong> {{ product.expirationDate }}</p>
@@ -42,9 +42,14 @@ export default {
       });
     },
     validateQuantity() {
+      if (this.localQuantity === null || this.localQuantity < 0) {
+        alert('La quantié ne peut pas être négative.');
+        this.$refs.quantityInput.focus();
+        return;
+      }
+
       if (this.localQuantity !== this.product.quantity) {
         this.$emit('update-quantity', { id: this.product.id, quantity: this.localQuantity });
-        this.isDirty = false;
       }
       this.isEditing = false;
     },
