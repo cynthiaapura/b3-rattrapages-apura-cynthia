@@ -11,7 +11,7 @@
         @click="product.quantity ? openProductDetails(product) : null">
         {{ product.name }} - Quantitée disponible : {{ product.quantity }}
         <div>
-          <span v-for="star in 5" :key="star" @click="setRating(product.id, star)"
+          <span v-for="star in 5" :key="star" @click.stop="setRating(product.id, star)"
             :style="{ cursor: 'pointer', color: star <= product.rate ? 'gold' : 'gray' }">
             ★
           </span>
