@@ -8,9 +8,9 @@ Afin de toucher un nouveau public, Picard souhaite rendre son offre plus facilem
 accessible auprès des étudiants grâce à la mise en place de distributeurs réfrigérés
 permettant de vendre ses produits.
 
-Étant donné que ce sujet est transversal avec les modules API et Front, j’ai volontairement intégré dans ce cahier des charges les fonctionnalités et besoins techniques attendus dans les autres livrables, afin d'assurer une continuité logique entre les différents rendus.
+Étant donné que ce sujet est transversal avec les modules API et Front, j’ai volontairement intégré dans ce cahier des charges les fonctionnalités et besoins techniques attendus dans les autres livrables, ainsi que des des fonctionnalités pertinentes pour un tel projet.
 
-Ce document a été rédigé dans une logique de clarté et de cohérence avec les autres modules techniques que je dois rendre.
+Ce document a été rédigé dans une logique de clarté et de cohérence avec les autres modules techniques que je dois rendre et le besoin défnit dans le contexte du sujet 12 : Gestion de projet - Cahier des charges.
 
 ## Vidéo explicative
 
