@@ -12,11 +12,7 @@ permettant de vendre ses produits.
 
 Ce document a été rédigé dans une logique de clarté et de cohérence avec les autres modules techniques que je dois rendre et le besoin défnit dans le contexte du sujet 12 : Gestion de projet - Cahier des charges.
 
-## Vidéo explicative
-
-- Lien vers la vidéo
-
-## 📚 Sources et références
+## Sources et références
 
 Pour la conception fonctionnelle et produit de mon cahier des charges, je me suis principalement appuyé sur mes connaissances personnelles ainsi que mon expérience en tant que product owner. 
 
