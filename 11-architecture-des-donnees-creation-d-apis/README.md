@@ -176,4 +176,11 @@ php bin/console doctrine:fixtures:load
 Cette API est publique et sans système d’authentification.
 Pour une mise en production, une intégration de JWT ou de sessions serait recommandée.
 
+## Sources
+
+[Docs API Platform](https://api-platform.com/docs/symfony)
+[Getting Started](https://api-platform.com/docs/core/getting-started)
+[Docs Symfony](https://symfony.com/doc/current/index.html)
+J'ai naviguée dans la doc de Symfony entre autre pour la mise en place du projet, ainsi que l'utilisation de Doctrine ou encore les templatings avec Twig
+
 ## Vidéo explicative
