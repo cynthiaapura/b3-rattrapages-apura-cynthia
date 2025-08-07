@@ -50,3 +50,7 @@ En tant que Product Owner depuis plus de deux ans, j’ai pu constater l’inté
 ### Remarques
 
 Ce document adopte une approche centrée sur les usages produits, en lien avec mon expérience en tant que Product Owner et les situations concrètes rencontrées dans un contexte professionnel. L’objectif est de proposer une analyse accessible, tout en restant ancrée dans des réalités techniques et éthiques actuelles.
+
+## Vidéo explicative
+
+[Youtube - Usage de l'ia](https://youtu.be/m-MtSVT6W8I)

@@ -93,7 +93,10 @@ L’application est ensuite disponible sur http://localhost:8080
 Pour l'utilisation de Vue.js je me suis appuyée sur mes connaissances acquise au fil de cette année de bachelor, mais également sur différentes documentations officielles afin d'approffondir mes connaissances.
 - [Docs des whatchers en Vue.js](https://vuejs.org/guide/essentials/watchers.html)
 - [Le LocalStorage](https://v2.fr.vuejs.org/v2/cookbook/client-side-storage.html)
+
 Concernant la mise en forme du site, je me suis appuyée sur les bases solides en HTML/CSS que j'ai pu acquerir tout au long de mon BTS, cependant pendant ce projet j'ai pu découvrir le *Scoped CSS* de Vue.js
 - [Scoped CSS](https://vuejs.org/api/sfc-css-features)
 
 ## Vidéo explicative
+
+[Youtube - Frameworks Front](https://youtu.be/K_50CSOzTEk)

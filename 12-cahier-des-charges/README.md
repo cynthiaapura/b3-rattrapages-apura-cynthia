@@ -29,3 +29,6 @@ Concernant l’accessibilité, je connaissais déjà les exigences du référent
 - [Monparcourshandicap.gouv.fr - WCAG : Web content accessibility guidelines](https://www.monparcourshandicap.gouv.fr/glossaire/wcag#:~:text=WCAG%20%3A%20Web%20content%20accessibility%20guidelines&text=Les%20personnes%20en%20situation%20de,difficultés%20à%20naviguer%20sur%20Internet.)
 - [w3.org - Web Content Accessibility Guidelines (WCAG) 2.0](https://www.w3.org/Translations/WCAG20-fr)
 
+## Vidéo explicative
+
+[Youtube - Cahier des charges](https://youtu.be/dv6UIkSYb3o)
